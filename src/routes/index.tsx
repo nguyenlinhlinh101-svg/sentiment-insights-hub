@@ -47,17 +47,19 @@ function SinglePage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-10">
       <div className="mb-8">
-        <div className="inline-flex items-center gap-2 rounded-full border bg-accent/50 px-3 py-1 text-xs font-medium text-accent-foreground">
+        <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-accent-foreground backdrop-blur">
           <Sparkles className="h-3.5 w-3.5" />
           Powered by DistilBERT · Hugging Face
         </div>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight">Single Text Analysis</h1>
-        <p className="mt-2 text-muted-foreground">
+        <h1 className="mt-4 text-5xl font-bold tracking-tight text-gradient leading-tight">
+          Single Text Analysis
+        </h1>
+        <p className="mt-3 text-muted-foreground text-lg">
           Paste any customer review, tweet, or comment to detect its sentiment in real time.
         </p>
       </div>
 
-      <Card className="border-2 shadow-sm">
+      <Card className="glass shadow-elegant">
         <CardHeader>
           <CardTitle>Your text</CardTitle>
           <CardDescription>The model classifies input as POSITIVE or NEGATIVE.</CardDescription>
@@ -67,11 +69,16 @@ function SinglePage() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="e.g. The product quality is amazing and the delivery was super fast!"
-            className="min-h-40 resize-y text-base"
+            className="min-h-40 resize-y text-base bg-background/40 border-white/10 transition-all focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:border-primary/40 shadow-inner"
           />
           <div className="flex items-center justify-between">
             <span className="text-xs text-muted-foreground">{text.length} characters</span>
-            <Button onClick={onAnalyze} disabled={loading} size="lg">
+            <Button
+              onClick={onAnalyze}
+              disabled={loading}
+              size="lg"
+              className="bg-gradient-primary text-white shadow-glow transition-all duration-300 hover:scale-[1.03] hover:shadow-elegant hover:brightness-110"
+            >
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -89,7 +96,7 @@ function SinglePage() {
       </Card>
 
       {error && (
-        <Alert variant="destructive" className="mt-6">
+        <Alert variant="destructive" className="mt-6 animate-fade-in-up">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Heads up</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
@@ -97,7 +104,7 @@ function SinglePage() {
       )}
 
       {loading && (
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 rounded-xl border bg-card p-10">
+        <div className="mt-8 flex flex-col items-center justify-center gap-3 rounded-xl glass p-10 animate-fade-in-up">
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
           <p className="text-sm text-muted-foreground">The neural network is thinking…</p>
         </div>
@@ -105,9 +112,12 @@ function SinglePage() {
 
       {result && !loading && (
         <Card
-          className="mt-6 border-2"
+          className="mt-6 border-2 glass animate-fade-in-up"
           style={{
             borderColor: isPositive ? "var(--success)" : "var(--destructive)",
+            background: isPositive
+              ? "linear-gradient(135deg, color-mix(in oklab, var(--success) 18%, transparent), color-mix(in oklab, var(--card) 80%, transparent))"
+              : "linear-gradient(135deg, color-mix(in oklab, var(--destructive) 18%, transparent), color-mix(in oklab, var(--card) 80%, transparent))",
           }}
         >
           <CardHeader>
@@ -115,20 +125,20 @@ function SinglePage() {
               <div>
                 <CardDescription>Predicted sentiment</CardDescription>
                 <CardTitle
-                  className="mt-1 text-3xl"
+                  className="mt-1 text-4xl font-bold tracking-tight"
                   style={{ color: isPositive ? "var(--success)" : "var(--destructive)" }}
                 >
                   {isPositive ? "POSITIVE 😀" : "NEGATIVE 😞"}
                 </CardTitle>
               </div>
               <div
-                className="flex h-16 w-16 items-center justify-center rounded-full"
+                className="flex h-20 w-20 items-center justify-center rounded-full text-3xl shadow-glow"
                 style={{
                   backgroundColor: isPositive ? "var(--success)" : "var(--destructive)",
                   color: "white",
                 }}
               >
-                {isPositive ? <ThumbsUp className="h-8 w-8" /> : <ThumbsDown className="h-8 w-8" />}
+                {isPositive ? <ThumbsUp className="h-9 w-9" /> : <ThumbsDown className="h-9 w-9" />}
               </div>
             </div>
           </CardHeader>
