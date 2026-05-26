@@ -22,13 +22,13 @@ export function AppSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="border-b border-sidebar-border">
+      <SidebarHeader className="border-b border-sidebar-border backdrop-blur-xl">
         <div className="flex items-center gap-2 px-2 py-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-primary text-sidebar-primary-foreground shadow-glow">
             <Brain className="h-5 w-5" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold">SentimentAI</span>
+            <span className="text-sm font-semibold text-gradient">SentimentAI</span>
             <span className="text-xs text-sidebar-foreground/60">NLP Dashboard</span>
           </div>
         </div>

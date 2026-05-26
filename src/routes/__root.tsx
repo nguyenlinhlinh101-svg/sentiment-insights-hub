@@ -98,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -116,10 +116,16 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <SidebarProvider>
-        <div className="flex min-h-screen w-full bg-background">
+        <div className="relative flex min-h-screen w-full bg-background overflow-hidden">
+          {/* Ambient background */}
+          <div className="pointer-events-none fixed inset-0 -z-10 grid-bg" />
+          <div className="pointer-events-none fixed -top-32 -left-32 -z-10 h-[480px] w-[480px] rounded-full bg-primary/30 blur-3xl animate-blob" />
+          <div className="pointer-events-none fixed top-1/3 -right-40 -z-10 h-[520px] w-[520px] rounded-full bg-fuchsia-500/20 blur-3xl animate-blob" style={{ animationDelay: "-6s" }} />
+          <div className="pointer-events-none fixed -bottom-40 left-1/3 -z-10 h-[420px] w-[420px] rounded-full bg-sky-500/20 blur-3xl animate-blob" style={{ animationDelay: "-12s" }} />
+
           <AppSidebar />
           <div className="flex flex-1 flex-col">
-            <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b bg-background/80 px-4 backdrop-blur">
+            <header className="sticky top-0 z-10 flex h-14 items-center gap-2 border-b border-white/10 bg-background/40 px-4 backdrop-blur-xl">
               <SidebarTrigger />
               <div className="text-sm font-medium text-muted-foreground">
                 Sentiment Analysis Platform
