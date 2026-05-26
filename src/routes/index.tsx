@@ -291,6 +291,7 @@ function SinglePage() {
             <Progress value={result.score * 100} className="h-3" />
           </CardContent>
         </Card>
+        </div>
       )}
 
       <div className="mt-10 flex flex-wrap items-center justify-center gap-2 border-t border-white/5 pt-4 text-xs text-muted-foreground">
