@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -112,6 +113,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -132,7 +134,9 @@ function RootComponent() {
               </div>
             </header>
             <main className="flex-1">
-              <Outlet />
+              <div key={location.pathname} className="animate-page-fade-in">
+                <Outlet />
+              </div>
             </main>
           </div>
         </div>
