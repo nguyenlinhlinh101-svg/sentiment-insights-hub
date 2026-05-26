@@ -248,7 +248,15 @@ function SinglePage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardDescription>Predicted sentiment</CardDescription>
+                <div className="flex items-center gap-2">
+                  <CardDescription>Predicted sentiment</CardDescription>
+                  <Badge
+                    variant="outline"
+                    className="text-[10px] font-normal tracking-wide"
+                  >
+                    {result.source}
+                  </Badge>
+                </div>
                 <CardTitle
                   className="mt-1 text-4xl font-bold tracking-tight"
                   style={{ color: isPositive ? "var(--success)" : "var(--destructive)" }}
