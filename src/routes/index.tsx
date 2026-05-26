@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Loader2, Sparkles, AlertCircle, ThumbsUp, ThumbsDown, Activity, Cpu, BarChart3, Lock, Wand2, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +24,13 @@ function SinglePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<SentimentResult | null>(null);
+  const resultRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (result && !loading && resultRef.current) {
+      resultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [result, loading]);
 
   const onAnalyze = async () => {
     setError(null);
@@ -236,6 +243,7 @@ function SinglePage() {
       )}
 
       {result && !loading && (
+        <div ref={resultRef}>
         <Card
           className={`mt-6 border-2 glass animate-fade-in-up ${isPositive ? "animate-pulse-glow-success" : "animate-pulse-glow-destructive"}`}
           style={{
@@ -283,6 +291,7 @@ function SinglePage() {
             <Progress value={result.score * 100} className="h-3" />
           </CardContent>
         </Card>
+        </div>
       )}
 
       <div className="mt-10 flex flex-wrap items-center justify-center gap-2 border-t border-white/5 pt-4 text-xs text-muted-foreground">
