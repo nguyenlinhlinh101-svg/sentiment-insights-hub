@@ -112,7 +112,7 @@ function SinglePage() {
 
       {result && !loading && (
         <Card
-          className="mt-6 border-2 glass animate-fade-in-up"
+          className={`mt-6 border-2 glass animate-fade-in-up ${isPositive ? "animate-pulse-glow-success" : "animate-pulse-glow-destructive"}`}
           style={{
             borderColor: isPositive ? "var(--success)" : "var(--destructive)",
             background: isPositive
