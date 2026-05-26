@@ -243,6 +243,7 @@ function SinglePage() {
       )}
 
       {result && !loading && (
+        <div ref={resultRef}>
         <Card
           className={`mt-6 border-2 glass animate-fade-in-up ${isPositive ? "animate-pulse-glow-success" : "animate-pulse-glow-destructive"}`}
           style={{
