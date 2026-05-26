@@ -77,7 +77,7 @@ function SinglePage() {
               onClick={onAnalyze}
               disabled={loading}
               size="lg"
-              className="bg-gradient-primary text-white shadow-glow transition-all duration-300 hover:scale-[1.03] hover:shadow-elegant hover:brightness-110"
+              className="bg-gradient-primary text-white shadow-glow transition-all duration-200 ease-out hover:scale-[1.05] active:scale-[0.96] hover:shadow-elegant hover:brightness-110 active:brightness-95"
             >
               {loading ? (
                 <>
